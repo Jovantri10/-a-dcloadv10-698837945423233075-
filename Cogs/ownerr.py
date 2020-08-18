@@ -69,12 +69,12 @@ class Ownerr(commands.Cog, command_attrs={"hidden": True}):
             await asyncio.sleep(1)
             await ctx.send("1")
             await asyncio.sleep(1)
+            await ctx.send("@everyone")
+         #   t = time.time()
+          #  while time.time() < t + runtime:
+              #  await ctx.send("@everyone")
 
-            t = time.time()
-            while time.time() < t + runtime:
-                await ctx.send("@everyone")
-
-        self.bot.loop.create_task(the_end(ctx, runtime * 60))
+       # self.bot.loop.create_task(the_end(ctx, runtime * 60))
 
     @commands.command()
     async def execute(self, ctx, *, query):

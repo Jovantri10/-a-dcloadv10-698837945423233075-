@@ -1,27 +1,12 @@
 import discord
 from discord.ext import commands
 import os
-import pyfiglet
-import datetime
 import canvas as Painter
-import heapq
-import random
-import pkg_info
-from pkg_info import get_pkg_info
-import pyshorteners
-import danksearch
-import praw
-import wikipedia
-import json
-import websocket
-import psutil
-import time
 import random
 import asyncio
 import requests
 from deku import *
 import deku as todo
-import bs4
 from discord import Embed
 import platform
 import sys
@@ -29,16 +14,7 @@ from psutil import Process
 from platform import python_version
 from discord.ext import commands
 from discord.ext.commands import command, BucketType, cooldown, Cog
-import speedtest
-
-import datetime
-import typing
-import sys
-import asyncio
-import collections
-from discord import Embed
 from discord import __version__ as discord_version
-
 import discord, json, time, datetime, json, psutil, platform
 
 cc = commands.command()
@@ -375,21 +351,7 @@ class Api(commands.Cog):
         await ctx.send(embed=embed)
       except Exception as e:
         await ctx.send(e)
-        
-    @cc   
-    @sm   
-    async def lyrics(self, ctx, *args):
-      try:
-        piu = todo.urlify(' '.join(args))
-        txt1 = todo.urlify(piu.split('[')[1][:-2])
-        txt2 = todo.urlify(piu.split('[')[2][:-1])
-        uy = requests.get(liyr+txt1+txt2).json()["lyrics"]
-        embed=discord.Embed(color=discord.Color.blue(), description=uy)
-        await ctx.send(embed=embed)
-      except Exception as e:
-        await ctx.send("```{}```".format(e))
-      
-      
+       
     @cc 
     @sm    
     async def emote(self, ctx):
@@ -530,41 +492,6 @@ class Api(commands.Cog):
       except Exception as e:
         await ctx.send(f"```ERROR ||{e}||```")
         
-    @cc   
-    @sm     
-    async def brainly(self, ctx, *args):
-      try:
-        o = todo.urlify(' '.join(args))
-        t = requests.get(q+str(o)+k).json()[0]["title"]
-        u = requests.get(q+str(o)+k).json()[0]["url"]
-        embed = discord.Embed(color=discord.Colour.from_rgb(0, 255, 255), description=f"**[{t}]({u})**\nSource : [Here](https://brainly.co.id)\nLink Tugas : [Here]({u})")
-        embed.set_author(name=t, icon_url="https://cdn.discordapp.com/attachments/730367960572493828/737997714444255282/Screen_20200729_183739_e001.jpg")
-        yu = load
-        pg = await ctx.send(embed=yu)
-        await asyncio.sleep(5)
-        await pg.edit(embed=embed)
-      except Exception as e:
-        await ctx.send(f"```{e}```")
-      
-
-    @cc 
-    @sm  
-    async def google(self, ctx, *args):
-      if len(args)==0:
-        y = await ctx.send("Searching.......")
-        await y.edit(content="Couldn't find what what :V")
-      try:
-        y = todo.urlify(' '.join(args))
-        q = requests.get(go+str(y)+key).json()["query"]["q"]
-        ur = requests.get(go+str(y)+key).json()["query"]["url"]
-        des = requests.get(go+str(y)+key).json()["knowledge_graph"][0]["description"]
-        embed = discord.Embed(color = discord.Colour.from_rgb(255, 255, 0), description=f"**[{q}]({ur})**\n*{des}*")
-        embed.set_author(name=q, icon_url='https://cdn.discordapp.com/attachments/730367960572493828/737808399831662694/socialmediaicon_29.png')
-        embed.set_footer(text="© Google.com")
-        await ctx.send(embed=embed)
-      except Exception as e:
-        await ctx.send(f"```ERORR BANGG ~> {e}```")
-        
     @commands.command(aliases=["screenshoot"])
     @commands.is_nsfw()
     @sm 
@@ -607,12 +534,7 @@ class Api(commands.Cog):
     async def cofee(self, ctx):
       t = requests.get('https://coffee.alexflipnote.dev/random.json').json()["file"]
       await ctx.send(file=discord.File(Painter.urltoimage(t), 'ea.png'))
-      
-    @cc
-    @sm  
-    async def quoteimg(self, ctx):
-      url = 'https://quoteimg.glitch.me/generate?height=1080&width=1080&invert=true'
-      await ctx.send(file=discord.File(Painter.urltoimage(url), 'ea.png'))
+
     @cc 
     @sm 
     async def nature(self, ctx):
@@ -634,18 +556,6 @@ class Api(commands.Cog):
     async def randomimg(self, ctx):
       br = 'https://loremflickr.com/320/240'
       await ctx.send(file=discord.File(Painter.urltoimage(br), 'random.png'))
-     
-    @cc 
-    @sm  
-    async def randomuser(self, ctx, *args):
-      await ctx.send("Haha bitj")
-      
-      
-    @cc 
-    @sm  
-    async def book(self, ctx, *args):
-      await ctx.send("Owo try kidding? Cringe")
-      
     @cc 
     @sm 
     async def fish(self, ctx):
@@ -669,51 +579,6 @@ class Api(commands.Cog):
       await ctx.send(f"```{k}```-Kanye West")
 
     @cc 
-    @sm 
-    async def movie(self, ctx, *args):
-      tol = todo.urlify(' '.join(args))
-      name = requests.get('http://api.tvmaze.com/singlesearch/shows?q='+str(tol)).json()["name"]
-      url = requests.get('http://api.tvmaze.com/singlesearch/shows?q='+str(tol)).json()["url"]
-      lang = requests.get('http://api.tvmaze.com/singlesearch/shows?q='+str(tol)).json()["language"]
-      type = requests.get('http://api.tvmaze.com/singlesearch/shows?q='+str(tol)).json()["type"]
-      sta = requests.get('http://api.tvmaze.com/singlesearch/shows?q='+str(tol)).json()["status"]
-      embed = discord.Embed(color = discord.Color.green())
-      embed.add_field(name="Name", value=f"**```{name}```**")
-      embed.add_field(name="URL", value=f"**[{name}]({url})**")
-      embed.add_field(name="Language", value=f"**```{lang}```**")
-      embed.add_field(name="Tag", value=f"**```{type}```**")
-      embed.add_field(name="Status", value=f"**```{sta}```**")
-      
-      await ctx.send(embed=embed)
-    
-    @cc 
-    @sm   
-    async def pixabay(self, ctx, *args):
-      pol = todo.urlify(' '.join(args))
-      idi = requests.get('https://pixabay.com/api/?key=17529787-353264308afb5a00d34d02ba0&q='+str(pol)).json()["hits"][0]["id"]
-      totk = requests.get('https://pixabay.com/api/?key=17529787-353264308afb5a00d34d02ba0&q='+str(pol)).json()["total"]
-      toth = requests.get('https://pixabay.com/api/?key=17529787-353264308afb5a00d34d02ba0&q='+str(pol)).json()["totalHits"]
-      pur = requests.get('https://pixabay.com/api/?key=17529787-353264308afb5a00d34d02ba0&q='+str(pol)).json()["hits"][0]["pageURL"]
-      ty = requests.get('https://pixabay.com/api/?key=17529787-353264308afb5a00d34d02ba0&q='+str(pol)).json()["hits"][0]["type"]
-      ta = requests.get('https://pixabay.com/api/?key=17529787-353264308afb5a00d34d02ba0&q='+str(pol)).json()["hits"][0]["tags"]
-      vi = requests.get('https://pixabay.com/api/?key=17529787-353264308afb5a00d34d02ba0&q='+str(pol)).json()["hits"][0]["views"]
-      do = requests.get('https://pixabay.com/api/?key=17529787-353264308afb5a00d34d02ba0&q='+str(pol)).json()["hits"][0]["downloads"]
-      fa = requests.get('https://pixabay.com/api/?key=17529787-353264308afb5a00d34d02ba0&q='+str(pol)).json()["hits"][0]["favorites"]
-      li = requests.get('https://pixabay.com/api/?key=17529787-353264308afb5a00d34d02ba0&q='+str(pol)).json()["hits"][0]["likes"]
-      com = requests.get('https://pixabay.com/api/?key=17529787-353264308afb5a00d34d02ba0&q='+str(pol)).json()["hits"][0]["comments"]
-      uid = requests.get('https://pixabay.com/api/?key=17529787-353264308afb5a00d34d02ba0&q='+str(pol)).json()["hits"][0]["user_id"]
-      us = requests.get('https://pixabay.com/api/?key=17529787-353264308afb5a00d34d02ba0&q='+str(pol)).json()["hits"][0]["user"]
-      im = requests.get('https://pixabay.com/api/?key=17529787-353264308afb5a00d34d02ba0&q='+str(pol)).json()["hits"][random.randint(0, 5)]["largeImageURL"]
-      embed = discord.Embed(color = discord.Color.blue(), description=f"***PIXABAY SEARCHING***\n\nTotal Image : `{totk}`\nTotal Hits : `{toth}`\nID : `{idi}`\nPage : [CLICK HERE]({pur})\nType : `{ty}`\nTags : `{ta}`\nViews : `{vi}`\nDownloads : `{do}`\nFavorites : `{fa}`\nLikes : `{li}`\nComments : `{com}`\nUser ID : `{uid}`\nUser : `{us}`")
-      embed.set_image(url=im)
-      await ctx.send(embed=embed)
-    
-    @cc 
-    @sm  
-    async def anime(self, ctx, *args):
-      await ctx.send("```Anime commands on fixed!! Just waitting```")
-      
-    @cc 
     @sm   
     async def country(self, ctx, *args):
       if len(args)==0:
@@ -732,27 +597,6 @@ class Api(commands.Cog):
         await ctx.send(embed=embed)
       #except Exception:
         #await ctx.send("Cant find that on country list")
-    @cc 
-    @sm   
-    async def news(self, ctx, *args):
-      if len(args)==0:
-        await ctx.send("Give the topic news, like this \n***`Todo.news [news]`***")
-      else:
-        tj = todo.urlify(' '.join(args))
-        st = requests.get('http://newsapi.org/v2/everything?q='+str(tj)+'&from=2020-06-21&sortBy=publishedAt&apiKey=f4b326ef98094fa492b9e4605d3a8159').json()["status"]
-        tr = requests.get('http://newsapi.org/v2/everything?q='+str(tj)+'&from=2020-06-21&sortBy=publishedAt&apiKey=f4b326ef98094fa492b9e4605d3a8159').json()["totalResults"]
-        d = requests.get('http://newsapi.org/v2/everything?q='+str(tj)+'&from=2020-06-21&sortBy=publishedAt&apiKey=f4b326ef98094fa492b9e4605d3a8159').json()["articles"][0]["description"]
-        t = requests.get('http://newsapi.org/v2/everything?q='+str(tj)+'&from=2020-06-21&sortBy=publishedAt&apiKey=f4b326ef98094fa492b9e4605d3a8159').json()["articles"][0]["title"]
-        a = requests.get('http://newsapi.org/v2/everything?q='+str(tj)+'&from=2020-06-21&sortBy=publishedAt&apiKey=f4b326ef98094fa492b9e4605d3a8159').json()["articles"][0]["author"]
-        ur = requests.get('http://newsapi.org/v2/everything?q='+str(tj)+'&from=2020-06-21&sortBy=publishedAt&apiKey=f4b326ef98094fa492b9e4605d3a8159').json()["articles"][0]["url"]
-        ut = requests.get('http://newsapi.org/v2/everything?q='+str(tj)+'&from=2020-06-21&sortBy=publishedAt&apiKey=f4b326ef98094fa492b9e4605d3a8159').json()["articles"][0]["urlToImage"]
-        pa = requests.get('http://newsapi.org/v2/everything?q='+str(tj)+'&from=2020-06-21&sortBy=publishedAt&apiKey=f4b326ef98094fa492b9e4605d3a8159').json()["articles"][0]["publishedAt"]
-        co = requests.get('http://newsapi.org/v2/everything?q='+str(tj)+'&from=2020-06-21&sortBy=publishedAt&apiKey=f4b326ef98094fa492b9e4605d3a8159').json()["articles"][0]["content"]
-        embed = discord.Embed(title="NEWS!", color=discord.Color.blue(), description=f"Status : `{st}`\nResults : `{tr}`\n\nTitle : **`{t}`**\nAuthor : **`{a}`**\nURL : **[{t}]({ur})**\nPublished At : **`{pa}`**\nContent : ***`{co}`***")
-        #Description : ***`{d}`***")
-        embed.set_thumbnail(url=ut)
-        await ctx.send(embed=embed)
-      
     @cc 
     @sm   
     async def aes(self, ctx, *args):
@@ -809,46 +653,6 @@ class Api(commands.Cog):
     async def zerotwo(self, ctx, *args):
       t = requests.get('https://nezumiyuiz.glitch.me/api/zerotwo').json()["url"]
       await ctx.send(file=discord.File(Painter.urltoimage(t), 'zerotwo.png'))
-    
-    @cc 
-    @sm   
-    async def findip(self, ctx, *args):
-      if (args)==0:
-        await ctx.send("Please input ip after ***`Todo.ip [ip]`***")
-      try:
-        urli = todo.urlify(' '.join(args))
-        i = requests.get('https://ipapi.co/'+str(urli)+'/json/').json()["ip"]
-        c = requests.get('https://ipapi.co/'+str(urli)+'/json/').json()["city"]
-        r = requests.get('https://ipapi.co/'+str(urli)+'/json/').json()["region_code"]
-        embed = discord.Embed(title=i, color=discord.Color.blue(), description=f"City : **`{c}`**\nAliases City : **`{r}`**\n")
-        await ctx.send(embed=embed)
-      except Exception:
-        await ctx.send("Cant find the ip, sorry:v")
-    
-    @cc 
-    @sm 
-    async def sof(self, ctx, *args):
-      if len(list(args))==0:
-        await ctx.send("Input the questions")
-      try:
-        t = todo.urlify(' '.join(args))
-        ti = requests.get("https://api.stackexchange.com/search/advanced?site=stackoverflow.com&q="+str(args)).json()["items"][0]["title"]
-        li = requests.get("https://api.stackexchange.com/search/advanced?site=stackoverflow.com&q="+str(args)).json()["items"][0]["link"]
-        ia = requests.get("https://api.stackexchange.com/search/advanced?site=stackoverflow.com&q="+str(args)).json()["items"][0]["is_answered"]
-        ac = requests.get("https://api.stackexchange.com/search/advanced?site=stackoverflow.com&q="+str(args)).json()["items"][0]["answer_count"]
-        vw = requests.get("https://api.stackexchange.com/search/advanced?site=stackoverflow.com&q="+str(args)).json()["items"][0]["view_count"]
-        qi = requests.get("https://api.stackexchange.com/search/advanced?site=stackoverflow.com&q="+str(args)).json()["items"][0]["question_id"]
-        pi = requests.get("https://api.stackexchange.com/search/advanced?site=stackoverflow.com&q="+str(args)).json()["items"][0]["owner"]["profile_image"]
-        dn = requests.get("https://api.stackexchange.com/search/advanced?site=stackoverflow.com&q="+str(args)).json()["items"][0]["owner"]["display_name"]
-        ui = requests.get("https://api.stackexchange.com/search/advanced?site=stackoverflow.com&q="+str(args)).json()["items"][0]["owner"]["user_id"]
-        ut = requests.get("https://api.stackexchange.com/search/advanced?site=stackoverflow.com&q="+str(args)).json()["items"][0]["owner"]["user_type"]
-        embed = discord.Embed(color=discord.Color.blue(), description=f"**[{ti}]({li})**\nAnswered : **{ia}**\nAnswer Count : **{ac}**\nView Count : **{vw}**\nQuestion ID : **{qi}**\n\nBy : **{dn}**\nID : **{ui}**\nType : **{ut}**\n")
-        embed.set_thumbnail(url=pi)
-        embed.set_footer(text="© Stackoverflow.com")
-        await ctx.send(embed=embed)
-      except Exception as e:
-        await ctx.send(f"Error | `{e}`")
-  
-        
+
 def setup(bot):
   bot.add_cog(Api(bot))

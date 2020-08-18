@@ -1,87 +1,32 @@
 import discord
-import discordgames as Games
-import client
 import canvas as Painter
-import asyncio
-from discord import client
-import json
-import datetime
-import logging
-from utils import has_voted
-from bs4 import BeautifulSoup
-import urllib.request
 import requests
-import re
-import os
-from datetime import datetime as todoroki
-from discord.utils import get
-from boto.s3.connection import S3Connection
-import re
 import datetime, time
-from discord.ext.commands import Bot
 from discord.ext import commands
-import time
-import random
-from keep_alive import keep_alive
 import asyncio
 from asyncio import sleep
 from discord.utils import get
-from random import randint
-import datetime
-import sys
-from discord.ext.commands import (Bot, BotMissingPermissions,
-                                  bot_has_permissions)
-from discord import *
-import pprint
-import random
-import asyncio
-import datetime
-import time
-import paginator
-from disputils import BotEmbedPaginator
 import keep_alive
 from keep_alive import keep_alive
-import praw
-import sys
-import subprocess
-import ast
-import json
 import udpy
 from udpy import UrbanClient
-import praw
-import traceback
-import platform
 import disputils
 from disputils import BotEmbedPaginator, BotConfirmation, BotMultipleChoice
-import psutil
-import base64
 import json
 import os
 import random
 from random import randint
-import signal
-import sys
-import urllib.parse
-import datetime
 from PIL import Image
 import requests
 import deku as todo
 import statcord
 from deku import *
 
-
 client = discord.Client
-client = commands.Bot(
-    brilliance="<:brillianceuwu:742359046706823168>",
-    bravery="<:braveuwu:742359151128346666>",
-    balance="<:balanceuwu:742359098523385938>",
-    command_prefix=["todo.","Todo."],
-    owner_id=552492140270452736)
+client = commands.Bot(command_prefix=["todo.","Todo."],owner_id=552492140270452736)
 #Set the command prefix to what you preferrint(f'Logged in as {bot.user.name} - {bot.user.id}')
-
 bot = client
 todoroki = bot
-
 
 async def statuschange():
 	while not client.is_closed():
@@ -104,12 +49,9 @@ async def statuschange():
 		        url="https://www.twitch.tv/pkidz2123"))
 		await asyncio.sleep(8)
 
-
 extensions = [
     'Cogs.image','Cogs.justme', 'Cogs.vaan', 'Cogs.commands', 'Cogs.api', 'Cogs.utils',
-    'Cogs.ownerr', 'Cogs.helpo', 'Cogs.util', 'Cogs.stuff', 'Cogs.jishaku',
-    'Cogs.ksoft', 'Cogs.mod', 'Cogs.warn', 'Cogs.afk', 'Cogs.snipe',
-    'Cogs.user', 'Cogs.Encoding', 'Cogs.misc commands', 'Cogs.membercount',
+    'Cogs.ownerr', 'Cogs.util', 'Cogs.jishaku','Cogs.helpo','Cogs.ksoft', 'Cogs.afk', 'Cogs.snipe', 'Cogs.membercount',
     'Cogs.Members', 'Cogs.Owner'
 ]
 
@@ -117,57 +59,23 @@ if __name__ == '__main__':
 	for extension in extensions:
 		client.load_extension(extension)
 
-
-def get_prefix(bot, message):
-	with open('prefixes.json', 'r') as f:
-		prefixes = json.load(f)
-
-		return prefixes[str(message.guild.id)]
-
-
+bot.remove_command('help')
 @bot.event
 async def on_ready():
-	ass = discord.Status.idle
-	print('Ready.')
-	await client.change_presence(status=ass)
-	replit.clear()
 	print(f'Logged in as {bot.user.name} - {bot.user.id}')
-	bot.remove_command('help')
-
-
-@bot.event
-async def on_command_error(ctx, error):
-	if isinstance(error, commands.CheckAnyFailure):
-		await ctx.send(f'Hm There is Error : \n ```{error}```')
-
-
-def get_prefix(client, message):
-	with open('prefixes.json', 'r') as f:
-		prefixes = json.load(f)
-
-		return prefixes[str(message.guild.id)]
-
+#	bot.remove_command('help')
 
 import statcord
-
 key = 'statcord.com-c9AeEy6Wic9clB5nIxH0'
 api = statcord.Client(bot, key)
 api.start_loop()
-
 
 @bot.event
 async def on_command(ctx, *args):
 	y = bot.get_channel(713061501333798932)
 	lo = bot.get_channel(736792598458531892)
-	await lo.send(
-	    f"*```{ctx.author} | {ctx.author.id} |\nUse {ctx.command.name} Commands\n-----------------------------------------------```*"
-	)
-	await y.send(
-	    f"```| ID : {ctx.author.id}\n| GUILD : {ctx.guild.id}\n| CHANNEL : {ctx.channel.id}\n| AUTHOR : {ctx.author}```"
-	)
-
+	await lo.send(f"**```{ctx.author} | {ctx.author.id} |\nUse {ctx.command.name} Commands\n-----------------------------------------------```**")
 	api.command_run(ctx)
-
 
 @todoroki.command(
     helpinfo='Looks up a sequence of numbers', aliases=['numbers', 'integers'])
@@ -196,29 +104,11 @@ async def oeis(ctx, *, number: str):
 	    '**Search result for:** ***{}...***'.format(number), embed=embed)
 
 
+held = ["https://cdn.discordapp.com/attachments/741845376314769468/743703038195138580/tenor_1.gif","https://cdn.discordapp.com/attachments/741845376314769468/743703037914251284/tenor_2.gif","https://cdn.discordapp.com/attachments/741845376314769468/743703037490626600/tenor_3.gif","https://cdn.discordapp.com/attachments/741845376314769468/743703037167796324/tenor_4.gif","https://cdn.discordapp.com/attachments/741845376314769468/743689816985698394/tenor.gif"]
+lala = [0x1abc9c, 0x9b59b6, 0x99aab5, 0x7289da, 0xa84300, 0xf1c40f, 0xe91e63, 0x546e7a]
 t = todoroki.command()
 cd = commands.cooldown(1, 12, commands.BucketType.user)
 owner = 552492140270452736
-
-
-@t
-@cd
-async def badges(ctx, member: discord.Member = None):
-  if member is None:
-    hard = ctx.author
-    io = hard.public_flags
-    o = ""
-    if io.hypesquad_bravery is True:
-      o += os.environ.get("BRA")+str(" - Hypesquad Bravery")
-    if io.hypesquad_brilliance is True:
-      o += os.environ.get("BRIL")+str(" - Hypesquad Brilliance")
-    if io.hypesquad_balance is True:
-      o += os.environ.get("BAL")+str(" - Hypesquad Balance")
-    if io.verified_bot_developer is True:
-      o += os.environ.get("VBD")+str(" - Verified Bot Developer")
-    if io.early_supporter is True:
-      o += os.environ.get("ES")+str(" - Early Supporter")
-    await ctx.send(f"{o}\n")
 
 @bot.command()
 @cd
@@ -234,8 +124,7 @@ async def bug(ctx, *, msg: str):
 	await own.send(ctx.author.id)
 	await ctx.send(
 	    "Thanks for reporting that bug! We will send your report now!.")
-
-
+	    
 @bot.command()
 @cd
 async def suggest(ctx, *, msg: str):
@@ -250,7 +139,6 @@ async def suggest(ctx, *, msg: str):
 	em.set_footer(text=f"Suggest sent by {ctx.message.author}")
 	await lol.send(embed=em)
 	await ctx.send("Thanks for Your Suggest!.")
-
 
 @todoroki.command(aliases=["trg"])
 @commands.cooldown(1, 8, commands.BucketType.user)
@@ -269,7 +157,6 @@ async def triggered(ctx):
 	except Exception as e:
 		await ctx.send(f"```404 ~> {e}```")
 
-
 @t
 @cd
 async def ping(ctx):
@@ -277,91 +164,12 @@ async def ping(ctx):
 	ping = round(ping * 1000)
 	await ctx.send("<:wipii:736786400069943398> Pong! `{} ms`".format(ping))
 
-
-@todoroki.command(aliases=["copid", "19"])
-@cd
-async def covid(ctx, *args):
-	if len(args) == 0:
-		cases = requests.get(
-		    'https://disease.sh/v3/covid-19/all').json()["cases"]
-		today = requests.get(
-		    'https://disease.sh/v3/covid-19/all').json()["todayCases"]
-		death = requests.get(
-		    'https://disease.sh/v3/covid-19/all').json()["deaths"]
-		dtoday = requests.get(
-		    'https://disease.sh/v3/covid-19/all').json()["todayDeaths"]
-		rec = requests.get(
-		    'https://disease.sh/v3/covid-19/all').json()["recovered"]
-		trec = requests.get(
-		    'https://disease.sh/v3/covid-19/all').json()["todayRecovered"]
-		act = requests.get(
-		    'https://disease.sh/v3/covid-19/all').json()["active"]
-		cri = requests.get(
-		    'https://disease.sh/v3/covid-19/all').json()["critical"]
-		popu = requests.get(
-		    'https://disease.sh/v3/covid-19/all').json()["population"]
-		embed = discord.Embed()
-		embed.set_author(
-		    name="Covid Stats",
-		    icon_url=
-		    "https://cdn.discordapp.com/attachments/721753102822277130/733695614843617350/691d9ddf630b9658d959075881715405.png"
-		)
-		embed.add_field(name='Total Cases', value=f'**```{cases} cases```**')
-		embed.add_field(name="Today Cases", value=f"**```{today}```**")
-		embed.add_field(name="Total Deaths", value=f"**```{death}```**")
-		embed.add_field(name="Deaths Today", value=f"**```{dtoday}```**")
-		embed.add_field(name="Recovered Total", value=f"**```{trec}```**")
-		embed.add_field(name="Active", value=f"**```{act}```**")
-		embed.add_field(name="Critical", value=f"**```{cri}```**")
-		embed.add_field(name="Population", value=f"**```{popu}```**")
-		embed.add_field(name="Recovered Today", value=f"**```{rec}```**")
-		embed.color = discord.Color.blue()
-		embed.set_thumbnail(
-		    url=
-		    "https://cdn.discordapp.com/attachments/721753102822277130/733695614843617350/691d9ddf630b9658d959075881715405.png"
-		)
-		await ctx.send(embed=embed)
-	try:
-		cav = todo.urlify(' '.join(args))
-		ca = requests.get(f'https://disease.sh/v3/covid-19/countries/' +
-		                  str(cav)).json()["cases"]
-		tca = requests.get(f'https://disease.sh/v3/covid-19/countries/' +
-		                   str(cav)).json()["todayCases"]
-		de = requests.get(f'https://disease.sh/v3/covid-19/countries/' +
-		                  str(cav)).json()["deaths"]
-		tre = requests.get(f'https://disease.sh/v3/covid-19/countries/' +
-		                   str(cav)).json()["todayRecovered"]
-		re = requests.get(f'https://disease.sh/v3/covid-19/countries/' +
-		                  str(cav)).json()["recovered"]
-		po = requests.get(f'https://disease.sh/v3/covid-19/countries/' +
-		                  str(cav)).json()["population"]
-		tde = requests.get(f'https://disease.sh/v3/covid-19/countries/' +
-		                   str(cav)).json()["todayDeaths"]
-		embed = discord.Embed(color=discord.Color.blue())
-		embed.add_field(name="Population ", value=f"**```{po}```**")
-		embed.add_field(name="Cases", value=f"**```{ca}```**")
-		embed.add_field(name="Today Cases", value=f"**```{tca}```**")
-		embed.add_field(name="Death", value=f"**```{de}```**")
-		embed.add_field(name="Today Death", value=f"**```{tde}```**")
-		embed.add_field(name="Today Recovered", value=f"**```{tre}```**")
-		embed.add_field(name="Recovered", value=f"**```{re}```**")
-		embed.set_thumbnail(
-		    url=
-		    "https://cdn.discordapp.com/attachments/721753102822277130/733695614843617350/691d9ddf630b9658d959075881715405.png"
-		)
-		await ctx.send(embed=embed)
-	except Exception:
-		await ctx.send(
-		    "Cant find country on list or there is no cases on that country")
-
-
 @t
 @cd
 async def contributors(ctx):
 	await ctx.send(
 	    f"<a:ncgaes:713235013809864774> ***SPECIAL THANKS***\n**```{bot.get_user(661200758510977084).name}#{bot.get_user(661200758510977084).discriminator} | {bot.get_user(271576733168173057).name}#{bot.get_user(271576733168173057).discriminator} | {bot.get_user(493768058012172288).name}#{bot.get_user(493768058012172288).discriminator} | {bot.get_user(524969551419670559).name}#{bot.get_user(524969551419670559).discriminator}```**"
 	)
-
 
 @todoroki.command(aliases=["jpgif"])
 @commands.cooldown(1, 12, commands.BucketType.user)
@@ -377,7 +185,6 @@ async def jpegify(ctx):
 		await ctx.send(
 		    file=discord.File(Painter.urltoimage(go), 'jpegify.png'))
 
-
 @todoroki.command(aliases=["snw"])
 @commands.cooldown(1, 12, commands.BucketType.user)
 async def snow(ctx):
@@ -390,7 +197,6 @@ async def snow(ctx):
 		    ctx.message.mentions[0].avatar_url).replace('.webp', '.png')
 		await ctx.send(file=discord.File(Painter.urltoimage(go), 'snow.png'))
 
-
 @todoroki.command(aliases=["bisex"])
 @commands.cooldown(1, 12, commands.BucketType.user)
 async def gay(ctx):
@@ -402,7 +208,6 @@ async def gay(ctx):
 		go = 'https://api.alexflipnote.dev/filter/gay?image=' + str(
 		    ctx.message.mentions[0].avatar_url).replace('.webp', '.png')
 		await ctx.send(file=discord.File(Painter.urltoimage(go), 'gay.png'))
-
 
 @todoroki.command(aliases=["cmnst"])
 @commands.cooldown(1, 12, commands.BucketType.user)
@@ -418,13 +223,11 @@ async def communist(ctx):
 		await ctx.send(
 		    file=discord.File(Painter.urltoimage(go), 'idonlikethis.png'))
 
-
 @t
 @cd
 async def fml(ctx):
 	aq = requests.get('https://api.alexflipnote.dev/fml').json()["text"]
 	await ctx.send(aq)
-
 
 @todoroki.command(aliases=["plt"])
 @commands.cooldown(1, 12, commands.BucketType.user)
@@ -440,20 +243,6 @@ async def pixelate(ctx):
 		await ctx.send(
 		    file=discord.File(Painter.urltoimage(go), 'pixelalex.png'))
 
-
-@todoroki.command(aliases=["bdanw"])
-@commands.cooldown(1, 12, commands.BucketType.user)
-async def bw(ctx):
-	if len(ctx.message.mentions) == 0:
-		gola = 'https://api.alexflipnote.dev/filter/b&w?image=' + str(
-		    ctx.author.avatar_url).replace('.webp', '.png')
-		await ctx.send(file=discord.File(Painter.urltoimage(gola), 'bw.png'))
-	if len(ctx.message.mentions) == 1:
-		go = 'https://api.alexflipnote.dev/filter/b&w?image=' + str(
-		    ctx.message.mentions[0].avatar_url).replace('.webp', '.png')
-		await ctx.send(file=discord.File(Painter.urltoimage(go), 'bw.png'))
-
-
 @todoroki.command(aliases=["blr"])
 @commands.cooldown(1, 12, commands.BucketType.user)
 async def blur(ctx):
@@ -465,7 +254,6 @@ async def blur(ctx):
 		go = 'https://api.alexflipnote.dev/filter/blur?image=' + str(
 		    ctx.message.mentions[0].avatar_url).replace('.webp', '.png')
 		await ctx.send(file=discord.File(Painter.urltoimage(go), 'blur.png'))
-
 
 @t
 @cd
@@ -480,36 +268,7 @@ async def invert(ctx):
 		    ctx.message.mentions[0].avatar_url).replace('.webp', '.png')
 		await ctx.send(
 		    file=discord.File(Painter.urltoimage(s), 'bangpeguigans.png'))
-
-
-@t
-@cd
-async def servercard(ctx):
-	bots = [x for x in ctx.guild.members if x.bot]
-	human = [x for x in ctx.guild.members if not x.bot]
-	offline = [
-	    user for user in ctx.guild.members
-	    if user.status == discord.Status.offline
-	]
-	dnd = [
-	    user for user in ctx.guild.members if user.status == discord.Status.dnd
-	]
-	online = [
-	    user for user in ctx.guild.members
-	    if user.status == discord.Status.online
-	]
-	idle = [
-	    user for user in ctx.guild.members
-	    if user.status == discord.Status.idle
-	]
-	esd = todo.urlify(''.join(ctx.guild))
-	try:
-		sc = f'https://useless-api--vierofernando.repl.co/servercard?icon={ctx.guild.icon_url}&name={esd}&date=2%20minutes%20ago&author=Todoroki%20Shouto&humans={len(human)}&bots={len(bots)}&roles={len(ctx.guild.roles)}&channels={len(ctx.guild.channels)}&boosters={ctx.guild.premium_subscribers or "0"}&tier={ctx.guild.premium_tier}&online={len(online)}'
-		await ctx.send(
-		    file=discord.File(Painter.urltoimage(sc), 'servercard.png'))
-	except Exception as e:
 		await ctx.send(f"```404 ~> {e}```")
-
 
 @t
 @cd
@@ -519,7 +278,6 @@ async def goat(ctx):
 	        Painter.urltoimage('https://placegoat.com/' +
 	                           str(random.randint(500, 700))), 'goat.png'))
 
-
 @t
 @cd
 async def snake(ctx):
@@ -528,7 +286,6 @@ async def snake(ctx):
 	        Painter.urltoimage('https://fur.im/snek/i/' +
 	                           str(random.randint(1, 874)) +
 	                           '.png'), 'snek.png'))
-
 
 @t
 @cd
@@ -542,7 +299,6 @@ async def iotd(ctx):
 	    color=discord.Color.from_rgb(201, 160, 112))
 	embed.set_image(url='https://bing.com' + data['url'])
 	await ctx.send(embed=embed)
-
 
 @t
 @cd
@@ -559,7 +315,6 @@ async def trash(ctx):
 			data = Painter.urltoimage(url)
 			await ctx.send(file=discord.File(data, 'trash.png'))
 
-
 @t
 @cd
 async def textimg(ctx, *args):
@@ -575,7 +330,6 @@ async def textimg(ctx, *args):
 			    + str(txt))
 			await ctx.send(file=discord.File(data, 'viero.png'))
 
-
 @t
 @cd
 async def captchatxt(ctx, *args):
@@ -588,7 +342,6 @@ async def captchatxt(ctx, *args):
 			    'https://api.alexflipnote.dev/captcha?text=' + str(capt))
 			await ctx.send(file=discord.File(data, 'captcha.png'))
 
-
 @t
 @cd
 async def serverinvite(ctx):
@@ -599,7 +352,6 @@ async def serverinvite(ctx):
 		    reason='Requested by ' + str(ctx.message.author.name))
 		await ctx.send('<a:load:713196760264212570> Succes! Link: **<' +
 		               str(serverinvite) + '>**')
-
 
 @todoroki.command(aliases=["disg"])
 @commands.cooldown(1, 8, commands.BucketType.user)
@@ -615,7 +367,6 @@ async def disgusting(ctx):
 		await ctx.send(
 		    file=discord.File(Painter.urltoimage(go), 'vierofernando.png'))
 
-
 @todoroki.command()
 async def duck(ctx):
 	await ctx.send(
@@ -623,7 +374,6 @@ async def duck(ctx):
 	        Painter.urltoimage(
 	            todo.jsonisp('https://random-d.uk/api/v2/random?format=json')
 	            ['url']), 'duck.png'))
-
 
 @todoroki.command(aliases=["ftv"])
 @commands.cooldown(1, 8, commands.BucketType.user)
@@ -639,7 +389,6 @@ async def ferbtv(ctx):
 		await ctx.send(
 		    file=discord.File(Painter.urltoimage(bbi), 'vierofernando.png'))
 
-
 @todoroki.command(aliases=["art"])
 @commands.cooldown(1, 8, commands.BucketType.user)
 async def artmeme(ctx):
@@ -653,7 +402,6 @@ async def artmeme(ctx):
 		    ctx.message.mentions[0].avatar_url).replace('.webp', '.png')
 		await ctx.send(
 		    file=discord.File(Painter.urltoimage(uu), 'vierofernando.png'))
-
 
 @todoroki.command(aliases=["gray"])
 @commands.cooldown(1, 8, commands.BucketType.user)
@@ -669,7 +417,6 @@ async def grayscale(ctx):
 		await ctx.send(
 		    file=discord.File(Painter.urltoimage(g), 'vierofernando.png'))
 
-
 @todoroki.command(aliases=["resp"])
 @commands.cooldown(1, 8, commands.BucketType.user)
 async def respect(ctx):
@@ -683,7 +430,6 @@ async def respect(ctx):
 		    ctx.message.mentions[0].avatar_url).replace('.webp', '.png')
 		await ctx.send(
 		    file=discord.File(Painter.urltoimage(f), 'vierofernando.png'))
-
 
 @todoroki.command()
 @commands.cooldown(1, 5, commands.BucketType.user)
@@ -699,7 +445,6 @@ async def sepia(ctx):
 		await ctx.send(
 		    file=discord.File(Painter.urltoimage(s), 'bangpeguigans.png'))
 
-
 @todoroki.command()
 @commands.cooldown(1, 7, commands.BucketType.user)
 async def baby(ctx):
@@ -712,8 +457,7 @@ async def baby(ctx):
 		b = 'https://useless-api--vierofernando.repl.co/baby?image=' + str(
 		    ctx.message.mentions[0].avatar_url).replace('.webp', '.png')
 		await ctx.send(
-		    file=discord.File(Painter.urltoimage(b), 'jovangans.png'))
-
+		    file=discord.File(Painter.urltoimage(b), 'credittonull#8626.png'))
 
 @t
 @cd
@@ -725,8 +469,7 @@ async def achiv(ctx, *args):
 			capt = todo.urlify(' '.join(args))
 			data = Painter.urltoimage(
 			    'https://api.alexflipnote.dev/achievement?text=' + str(capt))
-			await ctx.send(file=discord.File(data, 'alexcantik.png'))
-
+			await ctx.send(file=discord.File(data, 'credittoalex.png'))
 
 @todoroki.command()
 @commands.cooldown(1, 6, commands.BucketType.user)
@@ -739,20 +482,6 @@ async def catfact(ctx):
 	    color=discord.Color.blue())
 	await ctx.send(embed=em)
 
-
-@todoroki.command()
-@commands.cooldown(1, 6, commands.BucketType.user)
-async def quote(ctx):
-	quotetod = requests.get(
-	    'https://quotes.herokuapp.com/libraries/math/random').text
-	em = discord.Embed(
-	    title="Quote Today",
-	    description=f"{quotetod}",
-	    color=discord.Color.blue())
-	await ctx.send(embed=em)
-
-
-@has_voted()
 @todoroki.command(helpinfo='Wikipedia summary', aliases=['w', 'wiki'])
 @commands.cooldown(1, 4, commands.BucketType.user)
 async def wikipedia(ctx, *, query: str):
@@ -806,40 +535,36 @@ async def wikipedia(ctx, *, query: str):
 		await ctx.send(
 		    '**Search result for:** ***"{}"***:'.format(query), embed=embed)
 
-
 @bot.event
 async def on_guild_join(guild):
 	lol = bot.get_channel(726676707226157076)
-	em = discord.Embed(color=discord.Color(value=0x00ff00))
+	em = discord.Embed(color=discord.Color(value=0x2f3136))
 	em.title = f"Todoroki kun bot has arrived in new guids!"
 	em.description = f"<a:HatiMel:712209640750055464> Server Name : **{guild}**\n<a:HatiMel:712209640750055464> Server Count : {len(bot.guilds)} servers!"
 	await lol.send(embed=em)
 
-
-@bot.command(aliases=['topgg'])
+@bot.command(aliases=['topgg',"invite"])
 async def vote(ctx):
 	y = "You can vote me every 12 hours! Remember!"
 	vote = "https://top.gg/bot/714330708365148190"
 	embed = discord.Embed(
 	    title=
-	    "<a:verify10:698678441502965851> VOTE ME NOW <a:verify10:698678441502965851>"
+	    "<a:verify10:698678441502965851> VOTE OR INVITE ME <a:verify10:698678441502965851>"
 	)
-	embed.description = f"*{y}*\nWant vote me? Vote on here \n [Vote Me Now On Here :)]({vote})"
+	embed.description = f"*{y}*\nVote or Invite me on here \n [Here Love -]({vote})"
 	embed.timestamp = ctx.message.created_at
 	embed.color = discord.Color.blue()
 	embed.set_footer(text=f"{ctx.author.name}")
 	embed.set_thumbnail(url=bot.user.avatar_url)
 	await ctx.send(embed=embed)
 
-
 @bot.event
 async def on_guild_remove(guild):
 	lol = bot.get_channel(726827078543999099)
-	em = discord.Embed(color=discord.Color(value=0xf44242))
+	em = discord.Embed(color=discord.Color(value=0x2f3136))
 	em.title = f"Todoroki Kun bot has been removed from guild"
 	em.description = f"<a:Chekbaru:712209716645724221> Server : **{guild}**\n<a:Chekbaru:712209716645724221> Server Count : {len(bot.guilds)} Servers"
 	await lol.send(embed=em)
-
 
 @bot.command(aliases=["urb"])
 @commands.is_nsfw()
@@ -898,36 +623,19 @@ async def urban(ctx, *, arg=None):
 
 		await ctx.send(f"Can't find **{arg}** in Urban Dictionary.")
 
-
-@client.command(aliases=['json'])
-@commands.is_owner()
-async def json2(ctx, json3: str):
-	with open(f"{json3}.json", "r") as f:
-
-		command = json.load(f)
-
-		nicejson = pprint.pformat(command, indent=4, sort_dicts=True)
-		nicejson2 = nicejson[:-1] + "\n}"
-		nicejson3 = str(nicejson2).replace("'", '"')
-		await ctx.send(f'```json\n{nicejson3}```')
-
-
 @bot.command()
 @commands.is_owner()
 async def ay(ctx, *, msg: str):
 	await ctx.send(msg)
 	await ctx.message.delete()
 
-
 @bot.command()
 async def say(ctx, *, msg: str):
 	await ctx.send(msg)
 
-
 @bot.command()
 @commands.is_owner()
 async def connect(ctx, type=None):
-
 	if type == "serv":
 		ser = len(bot.guilds)
 		await ctx.send(f'Am connected to {ser} servers')
@@ -942,27 +650,12 @@ async def connect(ctx, type=None):
 		embed.description = f"{s}\n{u}"
 		await ctx.send(embed=embed)
 
-
 @bot.command(aliases=['bot'])
 @commands.is_owner()
 async def reboot(ctx):
 	await ctx.send('<a:fastdance3:712218698248880158> Restarting....')
 	os.execv(sys.executable, [sys.executable] + sys.argv)
 
-
-@client.command()
-@commands.is_owner()
-async def pip(ctx, module: str):
-
-	subprocess.check_call(["python3.8", "-m", "pip", "install", module])
-	await ctx.send('Installing module, please wait...')
-	asyncio.sleep(5)
-
-	output = subprocess.getoutput(f"python3.8 -m pip install {module}")
-	await ctx.send(f"Output:\n```{output}```")
-
-
-@has_voted()
 @bot.command(helpinfo='Searches for YouTube videos', aliases=['yt'])
 @commands.cooldown(1, 4, commands.BucketType.user)
 async def youtube(ctx, *, query: str):
@@ -977,11 +670,8 @@ async def youtube(ctx, *, query: str):
 	await ctx.send('**Video URL: https://www.youtube.com/watch?v={}**'.format(
 	    req.json()['items'][0]['id']['videoId']))
 
-
 start_time = time.time()
-
 bot.launch_time = datetime.datetime.utcnow()
-
 
 @bot.command(aliases=['up', 'upt'])
 @commands.is_owner()
@@ -993,7 +683,6 @@ async def uptime(ctx):
 	await ctx.send(
 	    f"<a:d0n3:712988326390530090> I am online since <a:d0n3:712988326390530090> ```{days}d, {hours}h, {minutes}m, {seconds}s```"
 	)
-
 
 @bot.command(helpinfo='For when plain text just is not enough')
 async def emojify(ctx, *, text: str):
@@ -1017,7 +706,6 @@ async def emojify(ctx, *, text: str):
 			await ctx.send('Your message could not be converted!')
 		else:
 			await author.send('`' + emojified + '`')
-
 
 @bot.command(
     helpinfo='Shows MC account info, skin and username history',
@@ -1045,120 +733,6 @@ async def minecraft(ctx, username='Van'):
 	await ctx.send('**Username: `{}`**\n**Skin: {}**\n**UUID: {}**'.format(
 	    username, url, uuid))
 
-
-@client.command()
-@commands.cooldown(1, 10, commands.BucketType.user)
-async def image(ctx, *, word):
-	linkWord = word.replace(' ', '+')
-	url = "https://imgur.com/search/time?q=" + linkWord + "&qs=thumbs"
-	page = urllib.request.urlopen(url)
-	soup = BeautifulSoup(page.read(), "html.parser")
-	imgLinkList = soup.find_all("a", {"class": "image-list-link"})
-	print(len(imgLinkList))
-	imgLink = imgLinkList[random.randrange(0, len(imgLinkList))]
-	#imgLink = imgLink.get("href")
-	#imgLink = imgContainerLink.find("img").get("src")
-	# await client.say(imgLink.replace("//i.imgur.com/","https://i.imgur.com/"))
-	await ctx.send("https://imgur.com/" + imgLink)
-
-
-@client.command()
-@commands.cooldown(1, 5, commands.BucketType.user)
-async def googling(ctx, *, word):
-	definition = ""
-	linkWord = word.replace(' ', '+')
-	url = 'https://www.wordnik.com/words/' + linkWord
-	page = urllib.request.urlopen(url)
-	soup = BeautifulSoup(page.read(), "html.parser")
-	definition = soup.select_one(
-	    '.active > h3:nth-child(1)').text + "\n\n" + soup.select_one(
-	        ".active > ul:nth-child(2) > li:nth-child(1)").text
-	await ctx.send("**" + word + "\n\n" + definition + "**")
-
-
-@client.command(pass_context=True)
-@commands.is_owner()
-async def servers(ctx):
-	await ctx.send(f"I am connected to {len(bot.guilds)} servers:")
-	async for guild in bot.fetch_guilds(limit=150):
-		await ctx.send(f"`{guild.name}` | `{guild.id}`")
-
-
-@servers.error
-async def servers_error(ctx, error):
-	if isinstance(error, commands.CheckFailure):
-		await ctx.send(error)
-
-
-@bot.command()
-@commands.is_owner()
-async def Myserver(ctx):
-	servers = []
-	for x in client.guilds:
-		Add = "\n"
-		New = str(x.name)
-		Final = str(New + Add)
-		servers.append(Final)
-		One_String = " ".join(servers)
-		embed = discord.Embed(
-		    colour=discord.Colour.blue(), timestamp=datetime.datetime.now())
-		embed.set_footer(text='Thanks to xEnder#0001 for helping')
-		embed.add_field(
-		    name=f"Servers: {len(bot.guilds)}", value=One_String, inline=False)
-	await ctx.send(embed=embed)
-
-
-@bot.command(name='99', help='Responds with a random quote from Brooklyn 99')
-async def nine_nine(ctx):
-	brooklyn_99_quotes = [
-	    'I\'m the human form of the 💯 emoji.',
-	    'Bingpot!',
-	    ('Cool. Cool cool cool cool cool cool cool, '
-	     'no doubt no doubt no doubt no doubt.'),
-	]
-
-	response = random.choice(brooklyn_99_quotes)
-	await ctx.send(response)
-
-
-@client.command()
-@commands.has_permissions(manage_roles=True)
-async def setupmute(ctx):
-	'''➜  Setup for Mute Command'''
-	role = discord.utils.get(ctx.guild.roles, name="Muted")
-	if role is not None:
-		await ctx.send("Role already created.")
-		for channel in ctx.guild.channels:
-			await channel.set_permissions(role, send_messages=False)
-	else:
-		newRole = await ctx.guild.create_role(name="Muted")
-		await ctx.send("Setup activated.")
-		for channel in ctx.guild.channels:
-			await channel.set_permissions(newRole, send_messages=False)
-		await ctx.send("Setup is complete.")
-
-
-@client.command()
-@commands.has_permissions(manage_roles=True)
-async def unmute(ctx, member: discord.Member = None):
-	'''
-  ➜  unmute who muted users
-  '''
-	await member.remove_roles(discord.utils.get(ctx.guild.roles, name="Muted"))
-	await ctx.send(f"<a:ac:713181919436603435> *{member} Already To Unmuted!*."
-	               )
-
-
-@client.command()
-@commands.has_permissions(manage_channels=True)
-async def slowmode(ctx, amount: int):
-	"""➜  Slowmode feature"""
-	await ctx.channel.edit(slowmode_delay=amount)
-	await ctx.send(
-	    f"**Set the slowmode of this channel to {amount} seconds <a:d0n3:712988326390530090>**"
-	)
-
-
 @client.command()
 async def userroles(ctx, member: discord.Member = None):
 	'''
@@ -1168,7 +742,7 @@ async def userroles(ctx, member: discord.Member = None):
 		member = ctx.author
 		roles = [role for role in member.roles]
 
-		embed = discord.Embed(title=f"{member.name}'s roles")
+		embed = discord.Embed(title=f"{member.name}'s roles", color=0x2f3136)
 		embed.set_thumbnail(url=member.avatar_url)
 		embed.add_field(
 		    name=f"Roles ({len(roles)})",
@@ -1177,7 +751,7 @@ async def userroles(ctx, member: discord.Member = None):
 	else:
 		roles = [role for role in member.roles]
 
-		embed = discord.Embed(title=f"{member.name}'s roles")
+		embed = discord.Embed(title=f"{member.name}'s roles", color=0x2f3136)
 		embed.set_thumbnail(url=member.avatar_url)
 		embed.add_field(
 		    name=f"Roles ({len(roles)})",
@@ -1205,12 +779,6 @@ async def roleinfo(ctx, *, role: discord.Role = None):
 		    name="Mentionable Role", value=format(role.mentionable))
 		embed.add_field(name="Role Created At", value=format(role.created_at))
 		await ctx.send(embed=embed)
-
-@client.command(pass_context=True)
-@commands.is_owner()
-async def users(ctx):
-	await ctx.send(
-	    f"There are {ctx.guild.member_count} members in this server.")
 
 keep_alive()
 client.loop.create_task(statuschange())
