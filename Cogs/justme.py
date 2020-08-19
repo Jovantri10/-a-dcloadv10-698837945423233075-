@@ -73,7 +73,10 @@ class Owner(Cog):
 			'bot': ctx.bot,
 			'discord': discord,
 			'commands': commands,
-			'ctx': ctx,
+			'van': ctx,
+			'o': id,
+			'js': json(),
+			'mention': ctx.message.mentions[0],
 			'send': ctx.send,
 			'author': ctx.author,
 			'guild': ctx.guild,
@@ -114,7 +117,7 @@ class Owner(Cog):
 				
 				#embed.set_author(icon_url=self.bot.user.avatar_url, name=self.bot.user.name)
 				#embed.add_field(name=name, value=value, inline=inline)
-		  o = discord.Embed(title="There is error!", description=f"***```{error}```***", color=0x2f3136)
+		  o = discord.Embed(description=f"***```{error}```***", color=0x2f3136)
 		  await ctx.send(embed=o)
 		  await ctx.message.add_reaction("<a:alpaiswarning:744891281397776454>")
 		elif isinstance(error, commands.NotOwner):

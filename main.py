@@ -49,11 +49,7 @@ async def statuschange():
 		        url="https://www.twitch.tv/pkidz2123"))
 		await asyncio.sleep(8)
 
-extensions = [
-    'Cogs.image','Cogs.justme', 'Cogs.vaan', 'Cogs.commands', 'Cogs.api', 'Cogs.utils',
-    'Cogs.ownerr', 'Cogs.util', 'Cogs.jishaku','Cogs.helpo','Cogs.ksoft', 'Cogs.afk', 'Cogs.snipe', 'Cogs.membercount',
-    'Cogs.Members', 'Cogs.Owner'
-]
+extensions = ['Cogs.topgg','Cogs.image','Cogs.justme', 'Cogs.vaan', 'Cogs.commands', 'Cogs.api', 'Cogs.utils','Cogs.ownerr', 'Cogs.util', 'Cogs.jishaku','Cogs.helpo','Cogs.ksoft', 'Cogs.afk', 'Cogs.snipe', 'Cogs.membercount','Cogs.Members', 'Cogs.Owner']
 
 if __name__ == '__main__':
 	for extension in extensions:
